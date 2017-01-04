@@ -5,8 +5,9 @@ class Controller_Admin extends Controller
 	
 	function action_index()
 	{
-		session_start();
 		
+		
+	//	echo 'Это контроллер админки!';
 		/*
 		Для простоты, в нашем случае, проверяется равенство сессионной переменной admin прописанному
 		в коде значению — паролю. Такое решение не правильно с точки зрения безопасности.
@@ -14,7 +15,9 @@ class Controller_Admin extends Controller
 		*/
 		if ( $_SESSION['admin'] == "12345" )
 		{
+			$link = new Connected();
 			$this->view->generate('admin_view.php', 'template_view.php');
+			mysqli_query( 'SELECT * FROM users', $link->get_link() );
 		}
 		else
 		{
